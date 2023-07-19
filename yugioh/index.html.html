@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yu-gi-oh</title>
+    <style>
+        
+        body{
+            background-image: url(yugi.jpg);
+            background-size: cover;
+        }
+        .cartavirada{
+            width: 200px;
+            height: 300px;
+            background-image: url(cartatras.jpg);
+            background-repeat: no-repeat;
+            background-size: 200px 300px;
+            position: relative;
+            border-radius: 20px;
+            display: inline-block;
+            margin-left: 150px;
+            transition: 1s;
+        }
+    
+    </style>
+</head>
+<body>
+    <div id="div1" class="cartavirada" onclick="virarcarta('div1', 'dragao_branco.jpg')"></div>
+    <div id="div2" class="cartavirada" onclick="virarcarta('div2', 'dnov.jpg')"></div>
+    <div id="div3" class="cartavirada" onclick="virarcarta('div3', 'star.jpg')"></div>
+    <div id="div4" class="cartavirada" onclick="virarcarta('div4', 'meteor.jpg')"></div>
+    <div id="div5" class="cartavirada" onclick="virarcarta('div5', 'meteor.jpg')"></div>
+    <div id="div6" class="cartavirada" onclick="virarcarta('div6', 'dnov.jpg')"></div>
+    <div id="div7" class="cartavirada" onclick="virarcarta('div7', 'dragao_branco.jpg')"></div>
+    <div id="div8" class="cartavirada" onclick="virarcarta('div8', 'star.jpg')"></div>
+
+        <script>
+        
+        var cartaVirada1 = null;  // Armazena o ID da primeira carta virada
+        var cartaVirada2 = null;  // Armazena o ID da segunda carta virada
+
+        function virarcarta(id, imagem) {
+            var div = document.getElementById(id);
+
+            // Verifica se a div já está virada
+            if (div.style.backgroundImage === 'none') {
+                return;  // Sai da função se já estiver virada
+            }
+
+            div.style.backgroundImage = "url('" + imagem + "')";
+
+            // Verifica se é a primeira ou segunda carta virada
+            if (cartaVirada1 === null) {
+                cartaVirada1 = id;
+            } else if (cartaVirada2 === null) {
+                cartaVirada2 = id;
+                verificarCartas();
+            }
+        }
+
+        function verificarCartas() {
+            var carta1 = document.getElementById(cartaVirada1);
+            var carta2 = document.getElementById(cartaVirada2);
+
+            // Verifica se as imagens são diferentes
+            if (carta1.style.backgroundImage !== carta2.style.backgroundImage) {
+                setTimeout(function() {
+                    carta1.style.backgroundImage = "url('cartatras.jpg')";
+                    carta2.style.backgroundImage = "url('cartatras.jpg')";
+                }, 1000);  // Define um intervalo de 1 segundo antes de virar as cartas de volta
+            }
+
+            // Reseta as variáveis
+            cartaVirada1 = null;
+            cartaVirada2 = null;
+        }
+    
+    </script>
+</body>
+</html>
